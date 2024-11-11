@@ -17,6 +17,12 @@ function RootLayout(_a) {
     var children = _a.children;
     return (React.createElement("html", { lang: "en" },
         React.createElement(head_1["default"], null,
+            React.createElement("title", null, "shulea learn - Teach, Learn, Earn!"),
+            React.createElement("meta", { name: "description", content: "hulea learn is learning platform that enables tutors create lessons , enroll learners easily , receive enrollment fees into their wallets and offer training with resource sharing all under one roof" }),
+            React.createElement("meta", { property: "og:image:type", content: "image/svg" }),
+            React.createElement("meta", { property: "og:image:width", content: "1200" }),
+            React.createElement("meta", { property: "og:image:height", content: "630" }),
+            React.createElement("meta", { property: "og:image", content: "https://shulea-learn-frontend.vercel.app/logo.svg" }),
             React.createElement("meta", { name: "twitter:card", content: "summary_large_image" }),
             React.createElement("meta", { name: "twitter:title", content: "shulea learn - Teach, Learn, Earn!" }),
             React.createElement("meta", { name: "twitter:description", content: "shulea learn is learning platform that enables tutors create lessons , enroll learners easily , receive enrollment fees into their wallets and offer training with resource sharing all under one roof." }),

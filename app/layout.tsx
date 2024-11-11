@@ -10,11 +10,11 @@ import Head from "next/head";
 
 const myAppFont = Nunito({ subsets: ["latin"] });
 
-// export const metadata: Metadata = {
-//   title: "shulea learn - Teach, Learn, Earn!",
-//   description:
-//     "shulea learn is learning platform that enables tutors create lessons , enroll learners easily , receive enrollment fees into their wallets and offer training with resource sharing all under one roof",
-// };
+export const metadata: Metadata = {
+  title: "shulea learn - Teach, Learn, Earn!",
+  description:
+    "shulea learn is learning platform that enables tutors create lessons , enroll learners easily , receive enrollment fees into their wallets and offer training with resource sharing all under one roof",
+};
 
 export default function RootLayout({
   children,
