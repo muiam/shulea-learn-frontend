@@ -27,7 +27,7 @@ function learnerEnroll() {
   AuthCheck();
   return (
     <AuthLayout>
-      <div className=" flex flex-col md:flex-row">
+      <div className=" flex flex-col lg:flex-row">
         <div className="flex-1 p-3 scrollbar-default overflow-y-scroll">
           <Tabs defaultValue="Express" className="text-slate-500">
             <TabsList className="grid w-full grid-cols-2">
