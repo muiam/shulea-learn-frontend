@@ -27,7 +27,7 @@ function Hero() {
           </div>
           <div className="flex flex-col gap-2 basis-1/4">
             <h2 className="font-extrabold text-[30px] text-primary">
-              Enter the Edtech revolution
+              Enter the Edtech revolution ...
             </h2>
             <p>
               Shulea is a Kenyan startup that leverages on high end technology
