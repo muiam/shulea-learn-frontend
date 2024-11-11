@@ -19,7 +19,7 @@ function Hero() {
         <div className="mb-20 flex flex-col lg:flex-row gap-10 text-slate-500">
           <div className="relative h-[400px] basis-3/4">
             <Image
-              src={"/product-screen1.png"}
+              src={"/product-screen1.PNG"}
               alt="product screen"
               layout="fill" // This makes the image fill the entire container
               objectFit="cover" // Ensures the image covers the container while maintaining aspect ratio
@@ -27,7 +27,7 @@ function Hero() {
           </div>
           <div className="flex flex-col gap-2 basis-1/4">
             <h2 className="font-extrabold text-[30px] text-primary">
-              Enter the Edtech revolution ...
+              Enter the Edtech revolution
             </h2>
             <p>
               Shulea is a Kenyan startup that leverages on high end technology
@@ -64,7 +64,7 @@ function Hero() {
             {" "}
             {/* Set height to ensure aspect ratio */}
             <Image
-              src="/product-screen2.png"
+              src="/product-screen2.PNG"
               alt="shulea product"
               layout="fill" // This makes the image fill the entire container
               objectFit="cover" // Ensures the image covers the container while maintaining aspect ratio
