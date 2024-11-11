@@ -24,7 +24,18 @@ export default function RootLayout({
   return (
     <html lang="en">
       <Head>
-        {/* Optional: Twitter card meta tags */}
+        <title>shulea learn - Teach, Learn, Earn!</title>
+        <meta
+          name="description"
+          content="hulea learn is learning platform that enables tutors create lessons , enroll learners easily , receive enrollment fees into their wallets and offer training with resource sharing all under one roof"
+        />
+        <meta property="og:image:type" content="image/svg" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta
+          property="og:image"
+          content="https://shulea-learn-frontend.vercel.app/logo.svg"
+        />
         <meta name="twitter:card" content="summary_large_image" />
         <meta
           name="twitter:title"
