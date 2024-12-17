@@ -3,7 +3,8 @@ import { client } from "@/sanity/lib/client";
 import { lessonDetailsQuery } from "@/sanity/lib/queries";
 import { NextApiRequest, NextApiResponse } from "next";
 
-export async function GET(req: NextRequest, res: NextApiResponse) {
+//ti should be a get request
+export async function POST (req: NextRequest, res: NextApiResponse) {
   // const { lessonId } = req.query; // Destructure `lessonId` from `params`
   // if(!lessonId){
   //   return res.status(400).json({ error: "No lessonId found" });
@@ -23,5 +24,6 @@ export async function GET(req: NextRequest, res: NextApiResponse) {
   //   return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
   // }
 
-  return NextResponse.json("hello world");
+  // return 200 statuscode
+  return NextResponse.json({ message: "success" });
 }
