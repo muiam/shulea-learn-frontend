@@ -1,9 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import { client } from "@/sanity/lib/client";
-import { lessonDetailsQuery} from "@/sanity/lib/queries";
+import { lessonDetailsQuery } from "@/sanity/lib/queries";
 
-export async function GET(request: NextRequest, { params }: { params: { lessonId: string } }) {
-  const lessonId = (await params).lessonId;
+export async function GET(request: NextRequest, context: { params: { lessonId: string } }) {
+  const { lessonId } = context.params; // Destructure `lessonId` from `params`
+
   console.log(`Endpoint triggered, and lessonId is ${lessonId}`);
 
   try {
