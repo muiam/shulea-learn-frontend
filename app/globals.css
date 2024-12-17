@@ -1,0 +1,59 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--background);
+  transition: background-color 1s ease;
+}
+
+:root {
+  --background: #f1d2d4;
+  --foreground: #171717;
+}
+
+/* Define a keyframe animation that will slowly change the background color */
+@keyframes backgroundChange {
+  0% {
+    --background: #f1d2d4; /* Starting color */
+  }
+  25% {
+    --background: #f5d1d3; /* Slight variation */
+  }
+  50% {
+    --background: #f8d0d1; /* Another slight variation */
+  }
+  75% {
+    --background: #f1d2d7; /* Slight variation returning to initial */
+  }
+  100% {
+    --background: #f5d1d2; /* Back to another variation */
+  }
+  10% {
+    --background: #f1d2d8; /* Starting color */
+  }
+  15% {
+    --background: #f5d1d9; /* Slight variation */
+  }
+  30% {
+    --background: #f8d0d5; /* Another slight variation */
+  }
+  45% {
+    --background: #f1d2d6; /* Slight variation returning to initial */
+  }
+  60% {
+    --background: #f5d1d0; /* Back to another variation */
+  }
+}
+
+@layer base {
+  :root {
+    --radius: 0.5rem;
+  }
+}
+
+/* Apply the animation to the body */
+body {
+  animation: backgroundChange 30s infinite;
+}
