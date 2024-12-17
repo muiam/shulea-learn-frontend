@@ -30,9 +30,9 @@ function Hero() {
             Enter the Edtech revolution
           </h2>
           <p>
-            Shulea is a Kenyan startup that leverages on high end technology to
-            make learning easy for both tutor and learnr by equiping them with a
-            tool that powers the learning process
+            Shulea Learn is a Kenyan startup that leverages on high end
+            technology to make learning easy for both tutor and learnr by
+            equiping them with a tool that powers the learning process
           </p>
           <p>
             Our learning platform has an integrated video conferencing software
