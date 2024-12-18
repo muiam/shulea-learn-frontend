@@ -3,13 +3,12 @@ import CreateGoalModal from "../../../(modals)/CreateGoalModal";
 import GoalsComponent from "@/app/_components/_private/GoalsComponent";
 import CreateScheduleModal from "@/app/(modals)/CreateScheduleModal";
 import ScheduleComponent from "@/app/_components/_private/ScheduleComponent";
-interface SingleLessonPageProps {
-  params: { lessonId: string };
-}
 
 export default async function SingleLessonPage({
   params,
-}: SingleLessonPageProps) {
+}: {
+  params: { lessonId: string };
+}) {
   const lessonId = (await params).lessonId;
 
   return (
