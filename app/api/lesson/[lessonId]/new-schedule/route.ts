@@ -1,7 +1,7 @@
 import { client, writeClient } from "@/sanity/lib/client";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function POST(req: NextRequest, res: NextResponse) {
+export async function POST(req: Request) {
     const { topic, capacity, date, startTime, endTime, price, link, hostedOnShulea, description, lessonId } = await req.json();
    // Assuming the date object contains the day, month, and year
 const dateObj = new Date(date.year, date.month - 1, date.day); // Month is 0-indexed in JavaScript
