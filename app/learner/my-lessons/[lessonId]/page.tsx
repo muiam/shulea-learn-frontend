@@ -9,7 +9,7 @@ export default async function SingleLessonPage({
 }: {
   params: { lessonId: string };
 }) {
-  const lessonId = (await params).lessonId;
+  const lessonId = params.lessonId;
 
   return (
     <div>
