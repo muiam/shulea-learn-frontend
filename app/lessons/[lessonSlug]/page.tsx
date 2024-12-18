@@ -26,63 +26,61 @@ import SingleLessonPublicDetailsComponent from "@/app/_components/_private/Singl
 export default async function lessonDetailsPage({
   params,
 }: {
-  params: { lessonSlug: string };
+  params: Promise<{ lessonSlug: string }>;
 }) {
-  const slug = (await params).lessonSlug;
-  const lessonId = slug.split("-").pop() ?? "";
+  const { lessonSlug } = await params;
+  const lessonId = lessonSlug.split("-").pop() ?? "";
 
   const lessonData = await client.fetch(singleLessonDetailsQuery(lessonId));
-  const lesson = lessonData[0]
+  const lesson = lessonData[0];
   return (
     <div>
       <Header />
       <div className="flex flex-col md:flex-row px-10 gap-3 min-h-screen mt-5">
         <div className="flex flex-col gap-3">
-
-         <Card
-              key={lesson._id}
-              className="w-full bg-transparent">
-              <CardHeader>
-                <div className="flex flex-col gap-3">
-                  <h2 className="text-lg font-bold">{lesson.title}</h2>
-                  <div className="flex flex-col md:flex-row gap-3">
+          <Card key={lesson._id} className="w-full bg-transparent">
+            <CardHeader>
+              <div className="flex flex-col gap-3">
+                <h2 className="text-lg font-bold">{lesson.title}</h2>
+                <div className="flex flex-col md:flex-row gap-3">
+                  <span className="flex gap-2">
+                    <IndentIncrease />
+                    {lesson.subject}
+                  </span>
+                  <div className="flex  gap-3">
                     <span className="flex gap-2">
-                      <IndentIncrease />
-                      {lesson.subject}
-                    </span>
-                    <div className="flex  gap-3">
-                      <span className="flex gap-2">
-                      <CircleHelp/>
-                        {lesson.chargePerLesson
+                      <CircleHelp />
+                      {lesson.chargePerLesson
                         ? "Charged per lesson"
                         : "Charged per schedule"}
                     </span>
                     <span className="flex gap-2">
                       <CalendarClock />
-                      {lesson.minimumNeeded ? lesson.minimumNeeded :1} schedules required
+                      {lesson.minimumNeeded ? lesson.minimumNeeded : 1}{" "}
+                      schedules required
                     </span>
-                    </div>
                   </div>
                 </div>
-              </CardHeader>
-              <CardBody>
-                <div className="flex flex-col md:flex-row gap-4">
-                  {/* make the lesson image width and height constant regardless of the image dimensions */}
-                  <div className="w-full md:w-[150px] md:h-[100px] h-[150px] bg-slate-500 rounded-lg"> 
-                    {/* make the image take the whole div */}
-                    <Image
-                      src={lesson.imageUrl ? lesson.imageUrl : "/numbers.jpg"}
-                      alt="lesson avatar"
-                      width={150}
-                      loading="lazy"
-                      height={150}
-                      className="rounded-lg object-cover w-full h-full"
-                    />
-                  </div>
-                <SingleLessonPublicDetailsComponent lesson={lesson} /> 
+              </div>
+            </CardHeader>
+            <CardBody>
+              <div className="flex flex-col md:flex-row gap-4">
+                {/* make the lesson image width and height constant regardless of the image dimensions */}
+                <div className="w-full md:w-[150px] md:h-[100px] h-[150px] bg-slate-500 rounded-lg">
+                  {/* make the image take the whole div */}
+                  <Image
+                    src={lesson.imageUrl ? lesson.imageUrl : "/numbers.jpg"}
+                    alt="lesson avatar"
+                    width={150}
+                    loading="lazy"
+                    height={150}
+                    className="rounded-lg object-cover w-full h-full"
+                  />
                 </div>
-              </CardBody>
-            </Card>
+                <SingleLessonPublicDetailsComponent lesson={lesson} />
+              </div>
+            </CardBody>
+          </Card>
           <div>
             <Tabs defaultValue="schedule" className="p-3">
               <TabsList className="grid w-full grid-cols-3 bg-transparent">
