@@ -7,9 +7,9 @@ import ScheduleComponent from "@/app/_components/_private/ScheduleComponent";
 export default async function SingleLessonPage({
   params,
 }: {
-  params: { lessonId: string };
+  params: Promise<{ lessonId: string }>;
 }) {
-  const lessonId = params.lessonId;
+  const { lessonId } = await params;
 
   return (
     <div>
