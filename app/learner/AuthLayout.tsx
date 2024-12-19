@@ -11,10 +11,10 @@ interface AuthLayoutProps {
 const AuthLayout: React.FC<AuthLayoutProps> = ({ children }) => {
   return (
     <div>
-      <div className="md:w-64 hidden fixed md:block">
+      <div className="md:w-64 fixed md:block z-50">
         <SideNavbar />
       </div>
-      <div className="ml-3 md:ml-64">
+      <div className="md:ml-64">
         <LoggedInUserHeader />
         {children}
       </div>

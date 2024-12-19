@@ -24,7 +24,7 @@ function JoinSchedule() {
 
   if (loading) {
     return (
-      <div className="justify-center text-center min-h-screen ">
+      <div className="justify-center text-cente ">
         <Spinner color="white" aria-label="wait a moment ... " />
       </div>
     );

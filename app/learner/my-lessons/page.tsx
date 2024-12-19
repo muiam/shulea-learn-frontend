@@ -17,12 +17,12 @@ async function MyLessons() {
   const myLessons = await client.fetch(myLessonsQuery(userId));
   return (
     <AuthLayout>
-      <div className="text-slate-500 md:p-3 min-h-screen">
+      <div className="text-slate-500 p-3">
         <h1 className="text-2xl font-bold mb-5">My Lessons</h1>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5 w-full">
           {/* display the lessons using cards in grid */}
           {myLessons.map((lesson: any) => (
-            <Card key={lesson._id} className="w-full bg-transparent">
+            <Card key={lesson._id} className="w-full bg-white">
               <CardHeader>
                 <div className="flex flex-col gap-3">
                   <h2 className="text-lg font-bold">{lesson.title}</h2>

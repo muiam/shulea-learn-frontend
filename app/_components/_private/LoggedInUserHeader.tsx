@@ -2,15 +2,19 @@
 
 import React, { useEffect, useState } from "react";
 import { UserButton, useUser } from "@clerk/nextjs";
-import { Switch } from "@nextui-org/react";
+import { Button, Switch } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
 import useUserRoleStore from "@/utils/userRoleStore";
+import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
+import useSidebarStore from "@/utils/useSideBarOpensStore";
 
 const LoggedInUserHeader: React.FC = () => {
   const { user } = useUser();
   const router = useRouter();
   const { role, toggleRole, initializeRole, isInitialized } =
     useUserRoleStore();
+  const { toggleSidebar, isSidebarOpen } = useSidebarStore(); // Accessing the Zustand store
+
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -23,7 +27,6 @@ const LoggedInUserHeader: React.FC = () => {
     router.push("/learner/dashboard");
   };
 
-  // Don't render the switch until client-side hydration is complete
   if (!mounted || !isInitialized) {
     return (
       <div className="p-4 shadow-sm border flex justify-end">
@@ -34,8 +37,21 @@ const LoggedInUserHeader: React.FC = () => {
     );
   }
 
+  // ... existing code ...
+
   return (
-    <div className="p-4 shadow-sm border flex justify-end">
+    <div className="flex justify-between md:justify-end items-center w-full p-4 shadow-sm border">
+      <Button
+        isIconOnly
+        onClick={toggleSidebar}
+        className="md:hidden"
+        variant="light">
+        {isSidebarOpen ? (
+          <ChevronLeftIcon size={60} />
+        ) : (
+          <ChevronRightIcon size={60} />
+        )}
+      </Button>
       <div className="flex gap-5 items-center">
         <Switch
           className="text-slate-500"
@@ -48,6 +64,8 @@ const LoggedInUserHeader: React.FC = () => {
       </div>
     </div>
   );
+
+  // ... existing code ...
 };
 
 export default LoggedInUserHeader;

@@ -36,7 +36,7 @@ export default async function lessonDetailsPage({
   return (
     <div>
       <Header />
-      <div className="flex flex-col md:flex-row px-10 gap-3 min-h-screen mt-5">
+      <div className="flex flex-col md:flex-row px-10 gap-3 mt-5">
         <div className="flex flex-col gap-3">
           <Card key={lesson._id} className="w-full bg-transparent">
             <CardHeader>

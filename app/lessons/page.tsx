@@ -12,7 +12,7 @@ export default async function lessonsPage() {
   return (
     <div>
       <Header />
-      <div className="p-10 flex flex-col gap-3 min-h-screen">
+      <div className="p-10 flex flex-col gap-3">
         <h2 className="text-slate-500 font-extrabold">Available lessons</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5 w-full">
           {/* display the lessons using cards in grid */}

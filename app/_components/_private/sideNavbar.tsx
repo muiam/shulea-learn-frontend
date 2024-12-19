@@ -1,20 +1,24 @@
-// SideNavbar.js
 "use client";
 
+import React, { useEffect } from "react";
 import Image from "next/image";
 import { Book, GraduationCap, LayoutIcon, Plus, Settings } from "lucide-react";
-import { useDisclosure } from "@nextui-org/react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { Button as NextUiButton } from "@nextui-org/button";
 import Link from "next/link";
 import CreateLessonModal from "@/app/(modals)/CreateLessonModal";
 import { useUser } from "@clerk/nextjs";
 import useUserRoleStore from "@/utils/userRoleStore";
+import useSidebarStore from "@/utils/useSideBarOpensStore"; // Import the sidebar store
+import { useDisclosure } from "@nextui-org/react";
+
 function SideNavbar() {
   const user = useUser();
   const { role } = useUserRoleStore(); // Access the current role from Zustand
   const path = usePathname();
+  const router = useRouter(); // Access the router to detect navigation
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const { isSidebarOpen, toggleSidebar } = useSidebarStore(); // Accessing the Zustand store
 
   // Menu items for learner and tutor
   const learnerMenuList = [
@@ -28,7 +32,7 @@ function SideNavbar() {
   ];
 
   const tutorMenuList = [
-    { id: 1, name: "Dashboard", icon: LayoutIcon, path: "/tutor/dashboard" },
+    { id: 1, name: "Dashboard", icon: LayoutIcon, path: "/learner/dashboard" },
     {
       id: 2,
       name: "My Lessons",
@@ -42,58 +46,70 @@ function SideNavbar() {
   // Select the appropriate menu based on the role
   const MenuList = role === "learner" ? learnerMenuList : tutorMenuList;
 
+  // Close the sidebar when a menu item is clicked
+  const handleMenuItemClick = (path: string) => {
+    toggleSidebar(); // Close the sidebar
+    router.push(path); // Navigate to the new path
+  };
+
   return (
-    <div className="shadow-md h-screen p-2">
-      <div className="flex justify-center mb-3">
-        <Image src="/logo.svg" width={40} height={20} alt="shulea logo" />
-      </div>
-
-      {role === "tutor" && (
-        <NextUiButton
-          onClick={onOpen}
-          className="w-full bg-primary text-slate-200 hover:bg-slate-200 hover:text-slate-500"
-          size="md">
-          <Plus />
-          Create
-        </NextUiButton>
-      )}
-
-      <CreateLessonModal isOpen={isOpen} onOpenChange={onOpenChange} />
-
-      <hr className="my-5" />
-
-      <div className="flex flex-col gap-5">
-        {MenuList.map((menu, index) => (
-          <Link key={index} href={menu.path}>
-            <h2
-              className={`flex justify-start items-center gap-3 text-md p-4 text-slate-500 hover:text-slate-500 rounded-lg ${
-                path == menu.path && "bg-[pink] text-slate-200"
-              }`}>
-              <menu.icon />
-              {menu.name}
-            </h2>
-          </Link>
-        ))}
-      </div>
-      {user && (
-        <div className="flex gap-2 text-center bottom-0 fixed p-2">
-          <Image
-            src={user.user?.imageUrl ? user.user.imageUrl : "/user.jpeg"}
-            width={35}
-            height={35}
-            alt="user"
-            className="rounded-full"
-          />
-          <div>
-            <h2 className="text-sm font-bold">
-              {user.user?.firstName} {user.user?.lastName}
-            </h2>
-            <h2 className="text-xs text-slate-400">
-              {user.user?.emailAddresses[0].emailAddress}
-            </h2>
-          </div>
+    <div>
+      {/* Sidebar for larger devices */}
+      <div
+        className={`w-64 z-50 md:z-0 fixed rounded-tr-md md:rounded-tr-none md:mt-0 left-0 h-full mt-24  bg-white shadow-md p-4 transition-transform duration-300 ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"} md:translate-x-0`}>
+        <div className="flex justify-center mb-3">
+          <Image src="/logo.svg" width={40} height={20} alt="shulea logo" />
         </div>
-      )}
+
+        {role === "tutor" && (
+          <NextUiButton
+            onClick={onOpen}
+            className="w-full bg-primary text-slate-200 hover:bg-slate-200 hover:text-slate-500"
+            size="md">
+            <Plus />
+            Create
+          </NextUiButton>
+        )}
+
+        <CreateLessonModal isOpen={isOpen} onOpenChange={onOpenChange} />
+
+        <hr className="my-5" />
+
+        <div className="flex flex-col gap-5">
+          {MenuList.map((menu, index) => (
+            <Link key={index} href={menu.path} passHref>
+              <h2
+                onClick={() => handleMenuItemClick(menu.path)} // Trigger the sidebar close on click
+                className={`flex justify-start items-center hover:bg-[pink] gap-3 text-md p-4 text-slate-500 hover:text-slate-500 rounded-lg ${
+                  path == menu.path && "bg-[pink] text-slate-200"
+                }`}>
+                <menu.icon />
+                {menu.name}
+              </h2>
+            </Link>
+          ))}
+        </div>
+
+        {user && (
+          <div className="hidden md:flex gap-2 text-center bottom-0 fixed p-2">
+            <Image
+              src={user.user?.imageUrl ? user.user.imageUrl : "/user.jpeg"}
+              width={35}
+              height={35}
+              alt="user"
+              className="rounded-full"
+            />
+            <div>
+              <h2 className="text-sm font-bold">
+                {user.user?.firstName} {user.user?.lastName}
+              </h2>
+              <h2 className="text-xs text-slate-400">
+                {user.user?.emailAddresses[0].emailAddress}
+              </h2>
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

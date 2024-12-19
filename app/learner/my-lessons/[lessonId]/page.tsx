@@ -12,26 +12,24 @@ export default async function SingleLessonPage({
   const { lessonId } = await params;
 
   return (
-    <div>
-      <AuthLayout>
-        <div className="flex flex-col gap-5 min-h-screen">
-          <div className="flex gap-5 h-[100px] bg-[yellow]">
-            lesson details here
+    <AuthLayout>
+      <div className="flex flex-col gap-5">
+        <div className="flex gap-5 h-[100px] bg-[yellow]">
+          lesson details here
+        </div>
+        <div className="flex flex-col md:flex-row gap-5">
+          <div className="w-full md:w-1/2 p-3 flex flex-col gap-3 text-slate-500">
+            <CreateGoalModal lessonId={lessonId} />
+            <GoalsComponent lessonId={lessonId} />
           </div>
-          <div className="flex flex-col md:flex-row gap-5">
-            <div className="w-full md:w-1/2 p-3 flex flex-col gap-3 text-slate-500">
-              <CreateGoalModal lessonId={lessonId} />
-              <GoalsComponent lessonId={lessonId} />
+          <div className="w-full md:w-1/2 p-3 flex flex-col gap-3">
+            <div className="flex justify-end">
+              <CreateScheduleModal lessonId={lessonId} />
             </div>
-            <div className="w-full md:w-1/2 p-3 flex flex-col gap-3">
-              <div className="flex justify-end">
-                <CreateScheduleModal lessonId={lessonId} />
-              </div>
-              <ScheduleComponent lessonId={lessonId} />
-            </div>
+            <ScheduleComponent lessonId={lessonId} />
           </div>
         </div>
-      </AuthLayout>
-    </div>
+      </div>
+    </AuthLayout>
   );
 }
