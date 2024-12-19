@@ -1,25 +1,26 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { Book, GraduationCap, LayoutIcon, Plus, Settings } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
 import { Button as NextUiButton } from "@nextui-org/button";
 import Link from "next/link";
 import CreateLessonModal from "@/app/(modals)/CreateLessonModal";
-import { useUser } from "@clerk/nextjs";
+import { UserButton, useUser } from "@clerk/nextjs";
 import useUserRoleStore from "@/utils/userRoleStore";
 import useSidebarStore from "@/utils/useSideBarOpensStore"; // Import the sidebar store
-import { useDisclosure } from "@nextui-org/react";
+import { Spinner, Switch, useDisclosure } from "@nextui-org/react";
 
 function SideNavbar() {
   const user = useUser();
-  const { role } = useUserRoleStore(); // Access the current role from Zustand
   const path = usePathname();
-  const router = useRouter(); // Access the router to detect navigation
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const { isSidebarOpen, toggleSidebar } = useSidebarStore(); // Accessing the Zustand store
-
+  const [mounted, setMounted] = useState(false);
+  const router = useRouter();
+  const { role, toggleRole, initializeRole, isInitialized } =
+    useUserRoleStore();
   // Menu items for learner and tutor
   const learnerMenuList = [
     { id: 1, name: "Dashboard", icon: LayoutIcon, path: "/learner/dashboard" },
@@ -52,11 +53,29 @@ function SideNavbar() {
     router.push(path); // Navigate to the new path
   };
 
+  useEffect(() => {
+    initializeRole();
+    setMounted(true);
+  }, [initializeRole]);
+
+  const handleSwitchChange = () => {
+    toggleRole();
+    router.replace("/learner/dashboard");
+  };
+
+  if (!mounted || !isInitialized) {
+    return (
+      <div className="p-4 shadow-sm border flex justify-end">
+        <Spinner color="white" size="md" />
+      </div>
+    );
+  }
+
   return (
     <div>
       {/* Sidebar for larger devices */}
       <div
-        className={`w-64 z-50 md:z-0 fixed rounded-tr-md md:rounded-tr-none md:mt-0 left-0 h-full mt-24  bg-white shadow-md p-4 transition-transform duration-300 ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"} md:translate-x-0`}>
+        className={`w-64 z-50 md:z-0 fixed rounded-tr-md md:rounded-tr-none md:mt-0 left-0 h-full mt-20  bg-white shadow-md p-4 transition-transform duration-300 border-t-2 md:border-t-0 ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"} md:translate-x-0`}>
         <div className="flex justify-center mb-3">
           <Image src="/logo.svg" width={40} height={20} alt="shulea logo" />
         </div>
@@ -88,6 +107,15 @@ function SideNavbar() {
               </h2>
             </Link>
           ))}
+          <div className="p-4">
+            <Switch
+              className="text-slate-500"
+              isSelected={role === "tutor"}
+              onValueChange={handleSwitchChange}
+              size="md">
+              {role === "learner" ? "Learner" : "Creator"}
+            </Switch>
+          </div>
         </div>
 
         {user && (
