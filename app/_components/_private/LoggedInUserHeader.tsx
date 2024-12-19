@@ -41,24 +41,20 @@ const LoggedInUserHeader: React.FC = () => {
 
   return (
     <div className="flex justify-between md:justify-end items-center w-full p-4 shadow-sm border">
-      <Button
-        isIconOnly
-        onClick={toggleSidebar}
-        className="md:hidden"
-        variant="light">
-        {isSidebarOpen ? (
-          <ChevronLeftIcon size={60} />
-        ) : (
-          <ChevronRightIcon size={60} />
-        )}
-      </Button>
+      <Switch
+        className="text-slate-500 md:hidden"
+        isSelected={isSidebarOpen}
+        onValueChange={toggleSidebar}
+        size="md">
+        {isSidebarOpen ? "Close menu" : "Open menu"}
+      </Switch>
       <div className="flex gap-5 items-center">
         <Switch
           className="text-slate-500"
           isSelected={role === "tutor"}
           onValueChange={handleSwitchChange}
           size="md">
-          {role === "learner" ? "Learner" : "Tutor"}
+          {role === "learner" ? "Learner" : "Creator"}
         </Switch>
         {user?.imageUrl && <UserButton />}
       </div>
