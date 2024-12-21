@@ -12,6 +12,7 @@
     "@clerk/nextjs": "^6.5.1",
     "@daily-co/daily-js": "^0.73.0",
     "@daily-co/daily-react": "^0.22.0",
+    "@jitsi/react-sdk": "^1.4.0",
     "@nextui-org/accordion": "^2.0.40",
     "@nextui-org/button": "^2.0.38",
     "@nextui-org/modal": "^2.0.41",
@@ -34,6 +35,7 @@
     "clsx": "^2.1.1",
     "framer-motion": "^11.11.10",
     "jotai": "^2.10.3",
+    "jsonwebtoken": "^9.0.2",
     "jwt-decode": "^4.0.0",
     "lucide-react": "^0.454.0",
     "next": "15.0.1",
@@ -53,6 +55,7 @@
     "zustand": "^5.0.2"
   },
   "devDependencies": {
+    "@types/jsonwebtoken": "^9.0.7",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
