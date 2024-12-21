@@ -23,7 +23,7 @@ function JoinSchedule() {
             const token = await generateToken({
               isOwner,
               user,
-              kid: "vpaas-magic-cookie-4e3ae730260d4656853da83e61a003a9/6ed90d",
+              kid: "vpaas-magic-cookie-4e3ae730260d4656853da83e61a003a9/258820",
               appId: process.env.NEXT_PUBLIC_JITSI_APP_ID!,
             });
 
@@ -42,7 +42,6 @@ function JoinSchedule() {
     fetchUserSchedule();
   }, [user, isLoaded, router]);
 
-  //make an api request to the server to get the token
   const generateToken = async ({
     user,
     kid,
@@ -55,6 +54,17 @@ function JoinSchedule() {
     isOwner: boolean;
   }) => {
     setLoading(true);
+
+    // Access user email address safely
+    const userEmail = user?.emailAddresses[0]?.emailAddress;
+
+    // Ensure email exists before making the API request
+    if (!userEmail) {
+      console.error("User email is not available");
+      setLoading(false);
+      return;
+    }
+
     const response = await fetch("/api/generateToken", {
       method: "POST",
       headers: {
@@ -63,13 +73,14 @@ function JoinSchedule() {
       body: JSON.stringify({
         id: user.id,
         name: user.firstName,
-        email: user.email,
+        email: userEmail,
         avatar: user.imageUrl,
         appId: appId,
         kid: kid,
         isOwner: isOwner,
       }),
     });
+
     const data = await response.json();
     setLoading(false);
     return data.token;
@@ -80,7 +91,7 @@ function JoinSchedule() {
   if (loading) {
     return (
       <div className="justify-center text-cente ">
-        <Spinner color="white" aria-label="wait a moment ... " />
+        <Spinner color="primary" aria-label="wait a moment ... " />
       </div>
     );
   }

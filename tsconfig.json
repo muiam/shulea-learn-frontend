@@ -37,7 +37,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts"
-  ],
+, "app/_components/_private/CallsComponent.jsx"  ],
   "exclude": [
     "node_modules"
   ]

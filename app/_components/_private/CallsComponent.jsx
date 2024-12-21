@@ -1,44 +1,32 @@
 "use client";
 
-import React from 'react';
-import { JitsiMeeting } from '@jitsi/react-sdk';
+import React from "react";
+import { JaaSMeeting, SpinnerView } from "@jitsi/react-sdk";
 
-
-
-function StartMeeting({ uuid  , jwtToken}) {
-
-  //get the use joining and use jwt to generate a token
-
-  const domain = "meet.jit.si"; // Use the public Jitsi meet server or your own Jitsi server
+function StartMeeting({ uuid, jwtToken }) {
   const room = uuid;
 
   return (
-    <JitsiMeeting
-      domain={domain}
-      jwt= {jwtToken}
+    <JaaSMeeting
+      appId={process.env.NEXT_PUBLIC_JITSI_APP_ID}
       roomName={room}
+      release = "release-5628"
+      domain={"8x8.vc"}
+      jwt={jwtToken}
       configOverwrite={{
-        startWithAudioMuted: false,
-        startWithVideoMuted: false,
-        disableModeratorIndicator: false,
-        startScreenSharing: true,
-        enableEmailInStats: false,
-        // Add the following line to grant moderator privileges
-        prejoinPageEnabled: false,
+        disableLocalVideoFlip: true,
+        backgroundAlpha: 0.5,
       }}
       interfaceConfigOverwrite={{
-        DISABLE_JOIN_LEAVE_NOTIFICATIONS: true,
+        VIDEO_LAYOUT_FIT: "nocrop",
+        MOBILE_APP_PROMO: false,
+        TILE_VIEW_MAX_COLUMNS: 4,
       }}
-      userInfo={{
-        displayName: 'YOUR_USERNAME',
-      }}
-      onApiReady={(externalApi) => {
-        // Attach custom event listeners to the Jitsi Meet External API
-        // Store it locally to execute commands
-      }}
+      // spinner = { SpinnerView }
+      // onApiReady = { (externalApi) => { ... } }
       getIFrameRef={(iframeRef) => {
-        iframeRef.style.height = '500px';
-        iframeRef.style.width = '70%';
+        iframeRef.style.height = "500px";
+        iframeRef.style.width = "70%";
       }}
     />
   );

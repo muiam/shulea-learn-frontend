@@ -5,7 +5,9 @@ import jwt from "jsonwebtoken";
 export async function POST(request: Request) {
   try {
     const privateKeyPath = path.join("utils", "privateKey.pk");
-    const privateKey = fs.readFileSync(privateKeyPath, "utf-8");
+      const privateKey = fs.readFileSync(privateKeyPath, "utf-8");
+      
+      console.log("The private key is:", privateKey);
 
     const { id, name, email, avatar, appId, kid, isOwner } = await request.json();
 
@@ -19,7 +21,7 @@ export async function POST(request: Request) {
             name,
             avatar,
             email: email,
-            moderator: isOwner ? "true" : "false",
+            moderator: false,
           },
           features: {
             livestreaming: "true",
