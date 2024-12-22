@@ -32,7 +32,7 @@ export default function ShareComponent({
     copyContainer: {
       border: "1px solid blue",
       background: "rgb(0,0,0,0.7)",
-      height: "200px", 
+      height: "200px",
     },
     title: {
       color: "aquamarine",

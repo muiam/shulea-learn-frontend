@@ -113,7 +113,7 @@ function SideNavbar() {
               isSelected={role === "tutor"}
               onValueChange={handleSwitchChange}
               size="md">
-              {role === "learner" ? "Learner" : "Creator"}
+              {role === "learner" ? "Learner" : "Tutor"}
             </Switch>
           </div>
         </div>
