@@ -10,16 +10,13 @@ import {
   Users,
   Award,
   Video,
-  ArrowRight,
   Calendar,
 } from "lucide-react";
 import Link from "next/link";
-import useUserRoleStore from "@/utils/userRoleStore";
 import LessonsByRoles from "@/app/_components/_private/LessonsByRoles";
 
 const Dashboard = () => {
   const { user } = useUser();
-  const { role } = useUserRoleStore();
   return (
     <AuthLayout>
       <div className="p-4 md:p-6 text-slate-700 flex flex-col gap-6">
