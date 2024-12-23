@@ -57,7 +57,7 @@ export default async function LessonDetailsPage({
                 <div className="p-6">
                   <SingleLessonPublicDetailsComponent lesson={lesson} />
                   {/* Tabs Navigation */}
-                  <SingleLessonTabs />
+                  <SingleLessonTabs lessonId={lesson._id} />
                 </div>
               </div>
             </div>

@@ -27,7 +27,6 @@ function LessonsByRoles() {
     try {
       if (!user?.id) return;
       const lessons = await client.fetch(myLessonsQuery(user.id));
-      console.log("my lessons", lessons);
       setMyCreatedLessons(lessons);
     } catch (error) {
       console.error("Error fetching lessons:", error);

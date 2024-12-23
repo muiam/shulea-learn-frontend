@@ -19,6 +19,20 @@ export const lessonEnrollmentType = defineType({
       to: [{ type: "user" }],
     }),
     defineField({
+      name: "hasAccessToAllSchedules",
+      title: "Has Access To All Schedules",
+      type: "boolean",
+      initialValue: false,
+    }),
+    
+    defineField({
+      name: "scheduleEnrolled",
+      title: "Schedule Enrolled",
+      type: "reference",
+      to: [{ type: "lessonSchedule" }],
+    }),
+
+    defineField({
       name: "enrollmentDate",
       title: "Enrollment Date",
       type: "date",

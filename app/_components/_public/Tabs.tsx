@@ -4,7 +4,7 @@ import OverviewTab from "./OverviewTab";
 import ReviewsTab from "./ReviewsTab";
 import ScheduleTab from "./ScheduleTab";
 
-function SingleLessonTabs() {
+function SingleLessonTabs({ lessonId }: { lessonId: string }) {
   const [activeTab, setActiveTab] = useState("Overview");
   return (
     <div>
@@ -26,8 +26,8 @@ function SingleLessonTabs() {
       </div>
       {/* Tab Content */}
       <div className="py-6">
-        {activeTab === "Overview" && <OverviewTab />}
-        {activeTab === "Schedules" && <ScheduleTab />}
+        {activeTab === "Overview" && <OverviewTab lessonId={lessonId} />}
+        {activeTab === "Schedules" && <ScheduleTab lessonId={lessonId} />}
         {activeTab === "Reviews" && <ReviewsTab />}
       </div>
     </div>

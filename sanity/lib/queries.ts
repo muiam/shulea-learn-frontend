@@ -66,6 +66,9 @@ export const lessonDetailsQuery = (lessonId: string) => groq`*[_type == "lesson"
 }`
 
 export const lessonSchedulesQuery = (lessonId: string) => groq`*[_type == "lessonSchedule" && lesson->_id == "${lessonId}"]{
+    "chargePerLesson" : *[_type == "lesson" && _id == ${lessonId}]{
+        chargePerLesson
+    },
     topic,
     date,
     dayName,
@@ -86,4 +89,8 @@ export const myLessonsSchedulesQuery = (userId: string,  scheduleId: string) => 
     price,
     description,
     _id
+}`
+
+export const LessonGoadQuery = (lessonId: string) => groq`*[_type == "goals" && lesson->_id == "${lessonId}"]{
+    goal
 }`
