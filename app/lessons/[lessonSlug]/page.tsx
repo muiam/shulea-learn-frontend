@@ -6,6 +6,7 @@ import Image from "next/image";
 import SingleLessonPublicDetailsComponent from "@/app/_components/_private/SingleLessonPublicDetailsComponent";
 import ShareButtonClient from "@/app/_components/_private/shareButtonClient";
 import SingleLessonTabs from "@/app/_components/_public/Tabs";
+import EnrollButton from "@/app/_components/_private/EnrollButton";
 
 export default async function LessonDetailsPage({
   params,
@@ -16,6 +17,7 @@ export default async function LessonDetailsPage({
   const lessonId = lessonSlug.split("-").pop() ?? "";
   const lessonData = await client.fetch(singleLessonDetailsQuery(lessonId));
   const lesson = lessonData[0];
+
   return (
     <div>
       <Header />
@@ -75,9 +77,7 @@ export default async function LessonDetailsPage({
                         KES {(lesson.price * 1.2).toFixed(2)}
                       </span>
                     </div>
-                    <button className="w-full py-3 px-6 bg-primary text-white rounded-xl hover:bg-primary/90 transition-colors mb-4">
-                      Enroll Now
-                    </button>
+                    <EnrollButton lesson={lesson} />
                     <ShareButtonClient Lesson={lesson} />
                   </div>
                 ) : (

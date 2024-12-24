@@ -8,9 +8,22 @@ interface ScheduleTabProps {
   lessonId: any; // Replace with proper type
 }
 
+interface LessonSchedule {
+  chargePerLesson: boolean;
+  topic: string;
+  date: string;
+  dayName: string;
+  startTime: string;
+  endTime: string;
+  price: number;
+  description: string;
+  _id: string;
+}
+
 export default function ScheduleTab({ lessonId }: ScheduleTabProps) {
-  const [lessonSchedules, setLessonSchedules] = useState<any[]>([]);
+  const [lessonSchedules, setLessonSchedules] = useState<LessonSchedule[]>([]);
   const [loading, setLoading] = useState(false);
+
   const fetchSchedules = async () => {
     setLoading(true);
     try {

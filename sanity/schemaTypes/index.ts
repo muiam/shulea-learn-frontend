@@ -4,6 +4,8 @@ import {lessonType} from './lessonType'
 import { goalType } from './goalType'
 import { lessonScheduleType } from './lessonScheduleType'
 import { lessonEnrollmentType } from './lessonEnrollMentType'
+import { paymentType } from './PaymentType'
+import { walletType } from './wallet'
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
     userType, 
@@ -11,5 +13,8 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     goalType,
     lessonScheduleType,
     lessonEnrollmentType,
+    paymentType,
+    walletType
+      
   ],
 };  

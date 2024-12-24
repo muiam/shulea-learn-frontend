@@ -45,7 +45,13 @@ function SingleLessonPublicDetailsComponent({ lesson }: { lesson: any }) {
                 key={index}
                 className="relative w-8 h-8 rounded-full border-2 border-white">
                 <Image
-                  src={participant.learner.imageUrl || "/user.jpeg"}
+                  src={
+                    participant &&
+                    participant.learner &&
+                    participant.learner.imageUrl
+                      ? participant.learner.imageUrl
+                      : "/user.jpeg"
+                  }
                   alt={`participant-${index}`}
                   fill
                   className="rounded-full object-cover"

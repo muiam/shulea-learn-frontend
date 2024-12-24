@@ -20,7 +20,6 @@ export default function OverviewTab({ lessonId }: OverviewTabProps) {
     try {
       if (!lessonId) return;
       const lessonGoals = await client.fetch(LessonGoadQuery(lessonId));
-      console.log("lessonGoals", lessonGoals);
       setLessonGoals(lessonGoals);
       setLoading(false);
     } catch (error) {
@@ -43,7 +42,7 @@ export default function OverviewTab({ lessonId }: OverviewTabProps) {
         </div>
       )}
       <ul className="flex flex-col gap-3">
-        {lessonGoals.map((goal: any, index:number) => (
+        {lessonGoals.map((goal: any, index: number) => (
           <li key={index} className="flex items-start gap-3">
             <span className="text-primary">•</span>
             <span>{goal.goal}</span>

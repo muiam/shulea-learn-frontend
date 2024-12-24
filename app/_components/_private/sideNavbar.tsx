@@ -7,7 +7,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { Button as NextUiButton } from "@nextui-org/button";
 import Link from "next/link";
 import CreateLessonModal from "@/app/(modals)/CreateLessonModal";
-import { UserButton, useUser } from "@clerk/nextjs";
+import { useUser } from "@clerk/nextjs";
 import useUserRoleStore from "@/utils/userRoleStore";
 import useSidebarStore from "@/utils/useSideBarOpensStore"; // Import the sidebar store
 import { Spinner, Switch, useDisclosure } from "@nextui-org/react";
