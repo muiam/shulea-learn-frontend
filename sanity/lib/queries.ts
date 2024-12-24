@@ -114,3 +114,8 @@ export const lessonEnrollmentQuery = (
     _id
   }
 }`;
+
+
+export const walletBalance = (userId: string) => groq`*[_type == "wallet" && user->clerkId == "${userId}"]{
+  balance
+}`;

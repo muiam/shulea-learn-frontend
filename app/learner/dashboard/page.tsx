@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import AuthLayout from "../AuthLayout";
 import { useUser } from "@clerk/nextjs";
 import { Button } from "@nextui-org/button";
@@ -14,9 +14,21 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import LessonsByRoles from "@/app/_components/_private/LessonsByRoles";
+import { client } from "@/sanity/lib/client";
+import { walletBalance } from "@/sanity/lib/queries";
 
 const Dashboard = () => {
   const { user } = useUser();
+  const [userWalletBalance, setwalletBalance] = useState(0);
+  const fetchUserBalance = async () => {
+    const wallet = await client.fetch(walletBalance(user?.id!));
+    setwalletBalance(wallet[0].balance);
+  };
+
+  useEffect(() => {
+    fetchUserBalance();
+  }, [user]);
+
   return (
     <AuthLayout>
       <div className="p-4 md:p-6 text-slate-700 flex flex-col gap-6">
@@ -55,12 +67,26 @@ const Dashboard = () => {
               <div className="flex gap-2">
                 <Wallet className="w-10 h-10 text-orange-600" />
                 <div className="flex-grow">
-                  <h2 className="font-semibold">KES 90,000</h2>
+                  <h2 className="font-semibold">
+                    KES {userWalletBalance || 0}
+                  </h2>
                 </div>
-                <Button color="primary" size="sm" className="ml-auto">
-                  <ArrowUpFromLine className="w-4 h-4" />
-                  <span className="ml-1">Cashout</span>
-                </Button>
+
+                {userWalletBalance == 0 ? (
+                  <Button
+                    disabled
+                    color="primary"
+                    size="sm"
+                    className="disabled:cursor-not-allowed ml-auto">
+                    <ArrowUpFromLine className="w-4 h-4" />
+                    <span className="ml-1">Cashout</span>
+                  </Button>
+                ) : (
+                  <Button color="primary" size="sm" className="ml-auto">
+                    <ArrowUpFromLine className="w-4 h-4" />
+                    <span className="ml-1">Cashout</span>
+                  </Button>
+                )}
               </div>
               <Link href={""}> view history</Link>
             </div>

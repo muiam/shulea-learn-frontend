@@ -128,9 +128,10 @@ function EnrollButton({ lesson }: { lesson: Lesson }) {
     setLoading(false);
     toast.error("Payment was not completed");
   };
+  const userEmail = user?.emailAddresses[0]?.emailAddress;
   const paystackConfig = {
     reference: new Date().getTime().toString(),
-    email: "testemailtosend@Gmail.com",
+    email: userEmail!,
     amount: lesson.chargePerLesson ? lesson.price * 100 : 200, // Amount in kobo
     publicKey:
       process.env.NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY ||
